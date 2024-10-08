@@ -15,7 +15,13 @@ import {
 import { getClient } from '@sentry/opentelemetry';
 import type { IntegrationFn, PolymorphicRequest, Request, SanitizedRequestData } from '@sentry/types';
 
-import { getSanitizedUrlString, logger, parseUrl, stripUrlQueryAndFragment } from '@sentry/utils';
+import {
+  getBreadcrumbLogLevelFromHttpStatusCode,
+  getSanitizedUrlString,
+  logger,
+  parseUrl,
+  stripUrlQueryAndFragment,
+} from '@sentry/utils';
 import { DEBUG_BUILD } from '../debug-build';
 import type { NodeClient } from '../sdk/client';
 import { setIsolationScope } from '../sdk/scope';
