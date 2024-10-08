@@ -175,8 +175,7 @@ export const instrumentHttp = Object.assign(
         patchRequestToCaptureBody(req, normalizedRequest);
 
         // Update the isolation scope, isolate this request
-        isolationScope.setSDKProcessingMetadata({ normalizedRequest });
-        isolationScope.setSDKProcessingMetadata({ request: req });
+        isolationScope.setSDKProcessingMetadata({ request: req, normalizedRequest });
 
         const client = getClient<NodeClient>();
         if (client && client.getOptions().autoSessionTracking) {
@@ -353,7 +352,7 @@ function patchRequestToCaptureBody(req: HTTPModuleRequestIncomingMessage, normal
     // eslint-disable-next-line @typescript-eslint/unbound-method
     req.on = new Proxy(req.on, {
       apply: (target, thisArg, args: Parameters<typeof req.on>) => {
-        const [event, listener] = args;
+        const [event, listener, ...restArgs] = args;
 
         if (event === 'data') {
           const callback = new Proxy(listener, {
@@ -366,7 +365,7 @@ function patchRequestToCaptureBody(req: HTTPModuleRequestIncomingMessage, normal
 
           callbackMap.set(listener, callback);
 
-          return Reflect.apply(target, thisArg, [event, callback]);
+          return Reflect.apply(target, thisArg, [event, callback, ...restArgs]);
         }
 
         if (event === 'end') {
@@ -389,7 +388,7 @@ function patchRequestToCaptureBody(req: HTTPModuleRequestIncomingMessage, normal
 
           callbackMap.set(listener, callback);
 
-          return Reflect.apply(target, thisArg, [event, callback]);
+          return Reflect.apply(target, thisArg, [event, callback, ...restArgs]);
         }
 
         return Reflect.apply(target, thisArg, args);
