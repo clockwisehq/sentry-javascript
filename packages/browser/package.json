@@ -15,8 +15,8 @@
     "types",
     "types-ts3.8"
   ],
-  "main": "build/npm/cjs/index.js",
-  "module": "build/npm/esm/index.js",
+  "main": "build/npm/cjs/",
+  "module": "build/npm/esm/",
   "types": "build/npm/types/index.d.ts",
   "typesVersions": {
     "<4.9": {
@@ -37,7 +37,7 @@
     "@sentry/integrations": "7.119.2",
     "@sentry/replay": "7.119.2",
     "@sentry/types": "7.119.2",
-    "@sentry/utils": "github:clockwisehq/sentry-javascript#7.119.2-clockwise.2&path:/packages/utils"
+    "@sentry/utils": "github:clockwisehq/sentry-javascript#7.119.2-clockwise.4&path:/packages/utils"
   },
   "devDependencies": {
     "@sentry-internal/integration-shims": "7.119.2",
