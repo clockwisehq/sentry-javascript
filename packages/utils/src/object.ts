@@ -24,6 +24,13 @@ export function fill(source: { [key: string]: any }, name: string, replacementFa
     return;
   }
 
+  // custom logic
+  // prevent errors in FF extension
+  const descriptors = Object.getOwnPropertyDescriptor(source, name);
+  if (descriptors && descriptors.writable === false) {
+    return;
+  }
+
   const original = source[name] as () => any;
   const wrapped = replacementFactory(original) as WrappedFunction;
 
@@ -102,9 +109,7 @@ export function urlEncode(object: { [key: string]: any }): string {
  * @returns An Event or Error turned into an object - or the value argurment itself, when value is neither an Event nor
  *  an Error.
  */
-export function convertToPlainObject<V>(
-  value: V,
-):
+export function convertToPlainObject<V>(value: V):
   | {
       [ownProps: string]: unknown;
       type: string;
