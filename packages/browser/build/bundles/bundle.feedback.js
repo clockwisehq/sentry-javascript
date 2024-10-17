@@ -1,4 +1,4 @@
-/*! @sentry/browser & @sentry/feedback 7.119.2 (9211bd475) | https://github.com/getsentry/sentry-javascript */
+/*! @sentry/browser & @sentry/feedback 7.119.2 (f84275832) | https://github.com/getsentry/sentry-javascript */
 var Sentry = (function (exports) {
 
   exports = window.Sentry || {};

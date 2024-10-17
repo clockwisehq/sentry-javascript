@@ -37,7 +37,7 @@
     "@sentry/integrations": "7.119.2",
     "@sentry/replay": "7.119.2",
     "@sentry/types": "7.119.2",
-    "@sentry/utils": "7.119.2"
+    "@sentry/utils": "github:clockwisehq/sentry-javascript#7.119.2-clockwise.2&path:/packages/utils"
   },
   "devDependencies": {
     "@sentry-internal/integration-shims": "7.119.2",
